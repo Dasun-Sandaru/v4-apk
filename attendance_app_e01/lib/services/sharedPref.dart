@@ -89,23 +89,20 @@ class SharedPref {
     return hasInfo;
   }
 
-//   // store market execution types in phone Db
-//   Future<void> saveMarketExecutionTypes(List<DropDownTypes> exeList) async {
-//     SharedPreferences pref = await SharedPreferences.getInstance();
-//     //pref.set('MarketExecutionTypes',exeList);
-//     pref.setString('MarketExecutionTypes',jsonEncode(exeList));
-//     print('MarketExecutionTypes Store In Local Db');
-//   }
+  // store market execution types in phone Db
+  Future<void> saveDataOnOff(bool onoff) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setBool('OnOff',onoff);
+    print('offon Store In Local Db $onoff');
+  }
 
-// // read execution types in phone Db
-//   Future<Map> readMarketExecutionTypes() async {
-//     SharedPreferences pref = await SharedPreferences.getInstance();
-//     //print('MarketExecutionTypes Read In Local Db :');
-
-//     print('wedsa');
-//     print(json.decode(pref.getString('MarketExecutionTypes')!));
-//     return json.decode(pref.getString('MarketExecutionTypes')!);
-//   }
+// read execution types in phone Db
+  Future<bool> readDataOnOff() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    bool onoff = pref.getBool('OnOff')!;
+    print('get ---- > $onoff');
+    return onoff;
+  }
 
   
 }

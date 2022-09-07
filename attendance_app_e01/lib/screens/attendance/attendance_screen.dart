@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import '../../helper/convertAddress.dart';
 import '../../models/drop down/drowdowntypes.dart';
 import '../../services/sharedPref.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -299,7 +300,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         buttonColor: const Color(0xFFee3a43), //  <-- dark color
         textTheme: ButtonTextTheme.primary,
         child: RaisedButton(
-          onPressed: () {
+          onPressed: () async {
             //getCurrentPosition();
 
             if (_formKey.currentState!.validate()) {
@@ -314,11 +315,28 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                   gravity: ToastGravity.BOTTOM,
                 );
               } else {
-                // panch data
-                setState(() {
-                  isLoading = true;
-                });
-                panch();
+                // enable location
+                OnLocation onLocation = OnLocation();
+                bool isReturnOn = await onLocation.enableLocation();
+
+                if (isReturnOn) {
+                  await getCurrentPositionCodes();
+                  //await getCurrentAddress();
+                  setState(() {});
+                  if (_latitude == 'current location') {
+                    Fluttertoast.showToast(
+                      msg: 'Please wait',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                    );
+                  } else {
+                    // // panch data
+                    setState(() {
+                      isLoading = true;
+                    });
+                    panch();
+                  }
+                }
               }
             } else {
               print("Error in validation state");
@@ -568,7 +586,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
           onTimeout: () {
             // Time has run out, do what you wanted to do.
             print(http.Response('Error', 408));
-            return http.Response('Error', 408); // Request Timeout response status code
+            return http.Response(
+                'Error', 408); // Request Timeout response status code
           },
         );
 

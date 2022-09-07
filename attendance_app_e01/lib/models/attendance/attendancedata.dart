@@ -29,16 +29,24 @@ class AttendanceData {
 
 class AttendanceResponse{
 
+    //Data data;
     late final String message;
     late final bool success;
+    //var token;
+    //String userName;
 
     AttendanceResponse({
       required this.message,
       required this.success,
+      //required this.userName,
+      //this.token,
     });
 
     factory AttendanceResponse.fromJson(Map<String,dynamic> loginData){
       return AttendanceResponse(
+        
+        //token : loginData['data']['token'],
+        //userName : loginData['data']['name'],
         message: loginData['message'], 
         success: loginData['success'],
       );

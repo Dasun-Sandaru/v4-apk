@@ -11,6 +11,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../helper/convertAddress.dart';
 import '../../helper/sqldb.dart';
 import '../../models/drop down/drowdowntypes.dart';
 import '../../models/offlineData.dart';
@@ -78,12 +79,19 @@ class _MarketExecutionState extends State<MarketExecution> {
   String? IndexOfSelectedDropDownItem;
 
   bool activeInternet = true;
+
   late StreamSubscription _streamSubscriptionInternetActiviteInMarketScreen;
 
   @override
   void initState() {
     checkingInternetConnection();
     super.initState();
+
+    // sharedPref.readToken();
+    // token = (await sharedPref.readToken())!;
+
+    // read offline state
+    //readofflineStatus();
 
     // get empNo
     getEmpNo();
@@ -102,6 +110,10 @@ class _MarketExecutionState extends State<MarketExecution> {
     getCurrentPosition();
     getCurrentAddress();
   }
+
+  // readofflineStatus() async {
+
+  // }
 
   Future<void> checkingInternetConnection() async {
     /// call ckeck internet active
@@ -127,6 +139,9 @@ class _MarketExecutionState extends State<MarketExecution> {
         default:
           print('in defalut $activeInternet');
       }
+
+      SharedPref sharedPref = SharedPref();
+      sharedPref.saveDataOnOff(activeInternet);
     });
 
     print('in await $activeInternet');
@@ -249,7 +264,7 @@ class _MarketExecutionState extends State<MarketExecution> {
     File(commonImg.path).renameSync(newName);
 
     print('New File Name ---> $newName');
-    GallerySaver.saveImage(newName, albumName: "AttendanceApp");
+    GallerySaver.saveImage(newName, albumName: "VBL SWAT");
 
     return newName;
   }
@@ -372,8 +387,7 @@ class _MarketExecutionState extends State<MarketExecution> {
           await placemarkFromCoordinates(local_latitude, local_longitude);
       List<Location> locations =
           await locationFromAddress(placemarks[0].toString());
-
-      //
+          
       //print(placemarks);
       Placemark place = placemarks[0];
       decodeAddress =
@@ -389,8 +403,13 @@ class _MarketExecutionState extends State<MarketExecution> {
 
   // get token
   getToken() async {
-    print('token');
     SharedPref sharedPref = SharedPref();
+
+    activeInternet = (await sharedPref.readDataOnOff());
+    print('in maekrt $activeInternet');
+
+    print('token');
+
     token = (await sharedPref.readToken())!;
 
     //await getDropDownValues(token);
@@ -752,10 +771,28 @@ class _MarketExecutionState extends State<MarketExecution> {
                 // user selected
                 // submit
 
-                setState(() {
-                  isLoading = true;
-                });
-                punch();
+                // enable location
+                OnLocation onLocation = OnLocation();
+                bool isReturnOn = await onLocation.enableLocation();
+
+                if (isReturnOn) {
+                  await getCurrentPosition();
+                  await getCurrentAddress();
+                  setState(() {});
+                  if (_address == 'current location' && _latitude == 'current location') {
+                    Fluttertoast.showToast(
+                      msg: 'Please wait',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                    );
+                  } else {
+                    // // panch data
+                    setState(() {
+                      isLoading = true;
+                    });
+                    punch();
+                  }
+                }
               }
             } else {
               print("Error in validation state");
@@ -885,15 +922,15 @@ class _MarketExecutionState extends State<MarketExecution> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        floatingActionButton: FloatingActionButton(onPressed: () async {
-          //deleteSumittedDataRow(5);
-          readMarketExecutionData();
-          // String sql = 'DELETE FROM markettbl WHERE id = 2';
-          //   var res = await sqlDbObj.deleteData(sql);
-          //   print(res);
+        // floatingActionButton: FloatingActionButton(onPressed: () async {
+        //   //deleteSumittedDataRow(5);
+        //   readMarketExecutionData();
+        //   // String sql = 'DELETE FROM markettbl WHERE id = 2';
+        //   //   var res = await sqlDbObj.deleteData(sql);
+        //   //   print(res);
 
-          //deleteImgFromGallery('s');
-        }),
+        //   //deleteImgFromGallery('s');
+        // }),
         backgroundColor: const Color(0xff043776),
         appBar: AppBar(
           backgroundColor: const Color(0xff043776),
@@ -1279,25 +1316,39 @@ class _MarketExecutionState extends State<MarketExecution> {
           String? decodeaddress =
               await decodeAddressCodes(local_longitude, local_latitude);
 
+          if (decodeaddress == null) {
+            setState(() {
+              isUploading = false;
+            });
+
+            Fluttertoast.showToast(
+              msg: "Please try again",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+            );
+          }
           print('local_longitude  ------> $local_longitude');
           print('local_latitude  ------> $local_latitude');
           print('decodeaddress  ------> $decodeaddress');
-          punchOfflineData(
-            offlineDataObj.id,
-            offlineDataObj.userid,
-            // offlineDataObj.geo_location,
-            decodeaddress!,
-            offlineDataObj.longitude,
-            offlineDataObj.latitude,
-            offlineDataObj.outlet_name,
-            offlineDataObj.execution_type,
-            offlineDataObj.remarks,
-            offlineDataObj.image1,
-            offlineDataObj.image2,
-            offlineDataObj.image3,
-            offlineDataObj.image4,
-            offlineDataObj.image5,
-          );
+
+          Future.delayed(Duration(seconds: 5), () {
+            punchOfflineData(
+              offlineDataObj.id,
+              offlineDataObj.userid,
+              // offlineDataObj.geo_location,
+              decodeaddress!,
+              offlineDataObj.longitude,
+              offlineDataObj.latitude,
+              offlineDataObj.outlet_name,
+              offlineDataObj.execution_type,
+              offlineDataObj.remarks,
+              offlineDataObj.image1,
+              offlineDataObj.image2,
+              offlineDataObj.image3,
+              offlineDataObj.image4,
+              offlineDataObj.image5,
+            );
+          });
         } else {
           setState(() {
             isUploading = false;

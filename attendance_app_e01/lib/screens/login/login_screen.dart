@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:attendance_app_e01/services/config.dart';
 import 'package:attendance_app_e01/services/device_info.dart';
 
@@ -15,6 +16,10 @@ import 'package:http/http.dart' as http;
 import '../../models/login/loginData.dart';
 import '../../services/sharedPref.dart';
 import '../home/home_screen.dart';
+
+// import 'package:device_info/device_info.dart';
+
+
 
 //To Do
 // -> 01. get ip
@@ -68,17 +73,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isLoading = false;
 
+  String identifier= '';
+
   // internet avative
   late StreamSubscription _streamSubscriptionInternetActiviteInLoginScreen;
 
-  // get iemi number
-  getIMEI() async {
-    try {} catch (e) {
-      print(e.toString());
-    }
-
-    if (!mounted) return;
-  }
+  double deviceHight = 0.0;
+  double deviceWidth = 0.0;
 
   // get ip
   Future<String> getIp() async {
@@ -258,6 +259,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    deviceHight = MediaQuery.of(context).size.height;
+    deviceWidth = MediaQuery.of(context).size.width;
+
+    print(deviceHight);
+    print(deviceWidth);
+
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
@@ -269,18 +276,25 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSizedBox(10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Image(
-                    image: AssetImage('assets/image/logo.png'),
-                    width: 200.0,
-                    height: 160.0,
+
+                  const SizedBox(height: 10),
+                  Container(
+                    width: deviceWidth,
+                    height: deviceWidth / 3,
+                    child: const Image(
+                      image: AssetImage('assets/image/Login Screen banner.png'),
+                      // width: double.infinity,
+                      // height: 200,
+                    ),
                   ),
+
+                  const SizedBox(height: 30),
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
@@ -340,7 +354,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final response = await http.post(
           Uri.parse("${Config.BACKEND_URL}login"),
           body: logindata.toJson(),
-        );
+        ).timeout(const Duration(seconds: 5));
 
         if (response.statusCode == 200) {
           // print('account created successfully');
@@ -443,28 +457,5 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // Future<void> initPlatformState() async {
-  //   String platformImei;
-  //   String idunique;
-  //   String ipAddress;
-  //   // Platform messages may fail, so we use a try/catch PlatformException.
-  //   try {
-  //     platformImei = await ImeiPlugin.getImei(shouldShowRequestPermissionRationale: false);
-  //     idunique = await ImeiPlugin.getId();
-  //     //ipAddress = await GetIp.ipAddress;
 
-  //     print('platformImei ---> $platformImei');
-  //   } on PlatformException {
-  //     platformImei = 'Failed to get platform version.';
-  //     ipAddress = 'Failed to get ipAddress.';
-  //   }
-
-  //   // if (!mounted) return;
-  //   // setState(() {
-  //   //   _platformImei = platformImei;
-  //   //   print(_platformImei);
-  //   //   uniqueId = idunique;
-  //   //   //_ip = ipAddress;
-  //   // });
-  // }
 }

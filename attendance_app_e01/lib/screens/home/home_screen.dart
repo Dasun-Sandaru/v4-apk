@@ -52,6 +52,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
+    
+
     // enable location
     enableLocation();
 
@@ -61,11 +63,17 @@ class _HomePageState extends State<HomePage> {
     // // read token
     //getToken();
 
+    SharedPref sharedPref = SharedPref();
+    sharedPref.saveDataOnOff(activeInternet);
+
     //check user online
     // call ckeck internet active
     _streamSubscriptionInternetActiviteInHomeScreen =
         InternetConnectionChecker().onStatusChange.listen((event) {
       final activeInternet = event == InternetConnectionStatus.connected;
+
+      SharedPref sharedPref = SharedPref();
+      sharedPref.saveDataOnOff(activeInternet);
 
       setState(() {
         this.activeInternet = activeInternet;
@@ -98,9 +106,9 @@ class _HomePageState extends State<HomePage> {
 
     print('row counting $rowcount');
 
-    if (rowcount == null || rowcount! == 0) {
+    if (rowcount == null || rowcount == 0) {
       getDropDownValuesToLocalDb(token);
-    } else if (rowcount! > 1) {
+    } else if (rowcount! >= 1) {
       // by pass
       print('by passing');
     }

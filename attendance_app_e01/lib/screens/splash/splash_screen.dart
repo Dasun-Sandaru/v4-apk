@@ -27,21 +27,21 @@ class _SplashScreenState extends State<SplashScreen> {
   String? userName;
 
   // widget
-  Widget _buildLogo() {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          Container(
-            child: const Image(
-              image: AssetImage('assets/image/logo_bgremove.png'),
-              width: 200.0,
-              height: 160.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildLogo() {
+  //   return Container(
+  //     child: Stack(
+  //       children: <Widget>[
+  //         Container(
+  //           child: const Image(
+  //             image: AssetImage('assets/image/logo_bgremove.png'),
+  //             width: 200.0,
+  //             height: 160.0,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +56,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     alignment: Alignment.center,
-                    image: AssetImage('assets/image/white.png'),
+                    image: AssetImage('assets/image/Splash Screen.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
             ),
-            _buildLogo(),
+
           ],
         ),
       ),
