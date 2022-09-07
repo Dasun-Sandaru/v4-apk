@@ -1,0 +1,171 @@
+name: attendance_app_e01
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  # camera: ^0.9.4+20
+  # path: ^1.8.2
+  # path_provider: ^1.1.0
+  intl: ^0.17.0
+  # shared preferrnces
+  shared_preferences: ^2.0.15
+  # get ip address
+  get_ip_address: ^0.0.5
+  # http requests
+  http: ^0.13.4
+  platform: ^3.1.0
+  # show toast msg
+  fluttertoast: ^8.0.9
+  # get imei number
+  device_information: ^0.0.4
+  # check active internet connection
+  internet_connection_checker: ^0.0.1+4
+  connectivity_plus: ^2.3.6
+  # get location coordinates
+  geolocator: ^9.0.1
+  # get location address
+  geocoding: ^2.0.4
+  # double click back button to close app
+  double_back_to_close_app: ^2.1.0
+  # img picker
+  image_picker: ^0.8.5+3
+  # gallery saver
+  gallery_saver: ^2.3.2
+  # local db
+  sqflite: ^2.0.3+1
+  path: ^1.8.1
+  path_provider: ^2.0.11
+  # icon launcher
+  flutter_launcher_icons: ^0.10.0
+  # location
+  location: ^4.4.0
+  # load web page on screen 
+  webview_flutter: ^3.0.4
+  # try get imei number
+  # imei_plugin: ^1.2.0
+
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/image/logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/image/logo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/image/logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^2.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+      - assets/image/1.jpeg
+      - assets/image/profile.jpg
+      - assets/image/fingerprint.png
+      - assets/image/leave.png
+      - assets/image/profile_1.png
+      - assets/image/setting.png
+      - assets/image/logo.png
+      - assets/image/profilepicture.png
+      - assets/image/1_Selfie.png
+      - assets/image/2_Store outside.png
+      - assets/image/3_Store inside.png
+      - assets/image/4_Cooler.png
+      - assets/image/5_Competitor analysis.png
+      - assets/image/manual.png
+      - assets/image/selfiescreen.png
+      - assets/image/leavescreen.png
+      - assets/image/lastscreen.png
+      - assets/image/logo_bgremove.png
+      - assets/image/white.png
+      - assets/image/market.png
+      
+      
+
+  fonts:
+    - family: Comfortaa
+      fonts:
+        - asset: assets/fonts/Comfortaa-Regular.ttf
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
