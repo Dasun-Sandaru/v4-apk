@@ -6,12 +6,5 @@ class Config{
 
   // static const InstructionWebPage = 'http://sfitcrm.cyberdev.tk/';
 
-  // static Map<String,dynamic> header(){
-  //   final Map<String,dynamic> header = Map <String,dynamic>();
-  //   header['Content-Type'] = "application//json";
-  //   header['Accept'] = application/json;
-  //   header['Authorization'] = 'Bearer $token';
-  //   return header;
-  // }
 
 }

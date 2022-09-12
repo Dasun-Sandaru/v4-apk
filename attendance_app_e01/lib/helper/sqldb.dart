@@ -99,47 +99,6 @@ class SqlDb {
     }
   }
 
-  //---------------------------------------------------------
-
-  // insertExecutionTypes(List<Map> list) async{
-  //   try {
-  //     // String sql = 'INSERT INTO ExecutionTypes (types) VALUES (?,?)' ,['another name', 12345678];
-  //   Database? mydb = await db;
-  //   int response = await mydb!.rawInsert('INSERT INTO ExecutionTypes (types) VALUES (?)',list);
-  //   //int response = await mydb!.insert(sql);
-  //   print(response);
-  //   return response;
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
-
-  // insertExecutionTypes(Map map) async{
-  //   try {
-  //     // String sql = 'INSERT INTO ExecutionTypes (types) VALUES (?,?)' ,['another name', 12345678];
-  //   Database? mydb = await db;
-  //   int response = await mydb!.rawInsert('INSERT INTO ExecutionTypes (types) VALUES (?)',[map]);
-  //   //int response = await mydb!.insert(sql);
-  //   print(response);
-  //   return response;
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
-
-  // insertExecutionTypes(String dataAsJson) async {
-  //   try {
-  //     // String sql = 'INSERT INTO ExecutionTypes (types) VALUES (?,?)' ,['another name', 12345678];
-  //     Database? mydb = await db;
-  //     int response = await mydb!
-  //         .rawInsert('INSERT INTO ExecutionTypes (types) VALUES (?)', [dataAsJson]);
-  //     //int response = await mydb!.insert(sql);
-  //     print(response);
-  //     return response;
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
 
   insertExecutionTypes(String dataAsJson) async {
     try {

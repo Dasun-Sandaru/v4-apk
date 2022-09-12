@@ -759,7 +759,7 @@ class _MarketExecutionState extends State<MarketExecution> {
               _formKey.currentState!.save();
 
               // execution type
-              if (IndexOfSelectedDropDownItem == null) {
+              if (dropdownvalue == null) {
                 // user not selected
                 // show toast
                 Fluttertoast.showToast(
@@ -893,7 +893,7 @@ class _MarketExecutionState extends State<MarketExecution> {
                               listOfDrofDownValues.indexOf(dropdownvalue);
                           //print(ddtypes[l].val_id);
                           IdOfSelectedDropDownItem =
-                              listOfDrofDownValues[indexOfSelectedItem].val_id;
+                              listOfDrofDownValues[indexOfSelectedItem].val_id.toString();
 
                           IndexOfSelectedDropDownItem =
                               indexOfSelectedItem.toString();

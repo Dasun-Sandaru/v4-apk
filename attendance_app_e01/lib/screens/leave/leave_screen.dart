@@ -299,7 +299,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
         // // this set State need to refesh drop down
         setState(() {});
       } else {
-        print('Request failed with status: ${responseType..statusCode}');
+        print('Request failed with status: ${responseType.statusCode}');
 
         Fluttertoast.showToast(
           msg: 'Request failed with status: ${responseType.statusCode}',
@@ -502,18 +502,20 @@ class _LeaveScreenState extends State<LeaveScreen> {
                         () {
                           dropdownvalue = val;
 
+                          // print(dropdownvalue);
+
                           int indexOfSelectedItem =
                               listOfDrofDownValues.indexOf(dropdownvalue);
-                          //print(ddtypes[l].val_id);
+                          print(listOfDrofDownValues[1].val_id);
                           IdOfSelectedDropDownItem =
-                              listOfDrofDownValues[indexOfSelectedItem].val_id;
+                              listOfDrofDownValues[indexOfSelectedItem].val_id.toString();
                           IndexOfSelectedDropDownItem =
                               indexOfSelectedItem.toString();
 
                           print(
                               'Id of selected item --> $IdOfSelectedDropDownItem');
-                          print(
-                              'Index of selected item --> $IndexOfSelectedDropDownItem');
+                          // print(
+                          //     'Index of selected item --> $IndexOfSelectedDropDownItem');
                         },
                       );
                     },
@@ -715,7 +717,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
                 _formKey.currentState!.save();
 
                 // check user select leave type
-                if (IndexOfSelectedDropDownItem == null) {
+                if (dropdownvalue == null) {
                   // user not selected
                   // show toast
                   Fluttertoast.showToast(

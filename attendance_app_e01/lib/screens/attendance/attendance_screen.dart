@@ -233,7 +233,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         // // this set State need to refesh drop down
         setState(() {});
       } else {
-        print('Request failed with status: ${responseType..statusCode}');
+        print('Request failed with status: ${responseType.statusCode}');
 
         Fluttertoast.showToast(
           msg: 'Request failed with status: ${responseType.statusCode}',
@@ -439,7 +439,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                               listOfDrofDownValues.indexOf(dropdownvalue);
                           //print(ddtypes[l].val_id);
                           IdOfSelectedDropDownItem =
-                              listOfDrofDownValues[indexOfSelectedItem].val_id;
+                              listOfDrofDownValues[indexOfSelectedItem].val_id.toString();
                           IndexOfSelectedDropDownItem =
                               indexOfSelectedItem.toString();
 

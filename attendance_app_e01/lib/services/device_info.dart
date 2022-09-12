@@ -16,13 +16,6 @@ class DeviceInfo {
     try {
       //platformVersion = await DeviceInformation.platformVersion;
       imeiNo = await DeviceInformation.deviceIMEINumber;
-      //modelName = await DeviceInformation.deviceModel;
-      //manufacturer = await DeviceInformation.deviceManufacturer;
-      //apiLevel = await DeviceInformation.apiLevel;
-      //deviceName = await DeviceInformation.deviceName;
-      // productName = await DeviceInformation.productName;
-      // cpuType = await DeviceInformation.cpuName;
-      // hardware = await DeviceInformation.hardware;
     } on PlatformException catch (e) {
       platformVersion = '${e.message}';
     }

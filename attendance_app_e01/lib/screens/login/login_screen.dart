@@ -354,7 +354,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final response = await http.post(
           Uri.parse("${Config.BACKEND_URL}login"),
           body: logindata.toJson(),
-        ).timeout(const Duration(seconds: 5));
+        );
 
         if (response.statusCode == 200) {
           // print('account created successfully');

@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
           );
         }
       } else {
-        print('Request failed with status: ${responseType..statusCode}');
+        print('Request failed with status: ${responseType.statusCode}');
 
         Fluttertoast.showToast(
           msg: 'Request failed with status: ${responseType.statusCode}',
